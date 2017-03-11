@@ -1,6 +1,6 @@
 {
   "name": "eventopoints",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Proyecto EventPoints de Open Source Weekends",
   "main": "server.js",
   "scripts": {
