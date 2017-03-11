@@ -9,9 +9,6 @@ var exec = require('child_process').exec,
 // Goblin Setup
 var goblinDB = GDB();
 
-// Bring data from datasources
-var data = goblinDB.get("events");
-
 // Starting the project
 project.services.get('http').configure({
     port: process.env.PORT || 3000
@@ -31,7 +28,7 @@ var apiEventsRoute = new Route({
     path: 'api/events',
     cors: true
 }, function(gw) {
-    gw.json(data, {
+    gw.json(goblinDB.get("events"), {
         deep: 10
     });
 });
@@ -90,11 +87,6 @@ var harmonizerTask = new Scheduled({
         harmonizer(goblinDB);
     }
 }).start();
-
-
-goblinDB.on('change', function(){
-    data = goblinDB.get("events");
-});
 
 harmonizerTask.launch();
 pythonRocks.launch();
